@@ -12,6 +12,7 @@ def mask_account_card(number: str) -> str:
     result = f"{number[:-16]}{new_number}"
     return result
 
+
 def get_new_data(old_data: str) -> str:
     """Функция принимает строку старой даты и форматирует её"""
     data_slise = old_data[0:10].split("-")
