@@ -17,13 +17,14 @@ def test_mask_card(number, new_string):
     assert mask_card(number) == new_string
 
 
-@pytest.mark.parametrize("numbered, new_string",
-                         [
-                             ("73654108430135874305", "**4305"),
-                             ("64686473678894779589", "**9589"),
-                             ("35383033474447895560", "**5560"),
-                             ("73654108430135874305", "**4305"),
-                         ],
-                         )
+@pytest.mark.parametrize(
+    "numbered, new_string",
+    [
+        ("73654108430135874305", "**4305"),
+        ("64686473678894779589", "**9589"),
+        ("35383033474447895560", "**5560"),
+        ("73654108430135874305", "**4305"),
+    ],
+)
 def test_mask_account(numbered, new_string):
     assert mask_account(numbered) == new_string
