@@ -25,7 +25,7 @@ def old_data():
 
 
 @pytest.fixture
-def number():
+def new_strings():
     return [
         "7000 79** **** 6361",
         "7158 30** **** 6758",
@@ -36,7 +36,7 @@ def number():
 
 
 @pytest.fixture
-def numbered():
+def numbers():
     return ["**4305", "**9589", "**5560", "**4305"]
 
 
