@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.fixture
 def number():
     return [
@@ -12,6 +13,8 @@ def number():
         "Visa Gold 5999 41** **** 6353",
         "**4305",
     ]
+
+
 @pytest.fixture
 def old_data():
     return [
@@ -19,6 +22,7 @@ def old_data():
         "03.07.2019",
         "30.06.2018",
     ]
+
 
 @pytest.fixture
 def number():
@@ -29,6 +33,7 @@ def number():
         "8990 92** **** 5229",
         "5999 41** **** 6353",
     ]
+
 
 @pytest.fixture
 def numbered():
