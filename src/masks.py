@@ -6,5 +6,5 @@ def mask_card(number: str) -> str:
 
 def mask_account(numbered: str) -> str:
     """Функция принимает строку и возвращаем маскировку счета"""
-    new_strings = f"** {numbered[-4:]}"
+    new_strings = f"**{numbered[-4:]}"
     return new_strings
