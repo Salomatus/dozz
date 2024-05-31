@@ -9,7 +9,7 @@ def mask_account_card(number: str) -> str:
         result = f"{number[:-16]}{new_number}"
         return result
     new_number = mask_account(number.split()[-1])
-    result = f"{number[:-16]}{new_number}"
+    result = f"{number[:-20]}{new_number}"
     return result
 
 

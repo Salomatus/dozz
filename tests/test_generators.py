@@ -16,7 +16,7 @@ def test_filter_by_currency(transactions):
 
 
 def test_transactions_descriptions(transactions):
-    transactions_descript = transactions_descriptions(transactions)
+    transactions_descript = transaction_descriptions(transactions)
     assert next(transactions_descript) == "Перевод организации"
     assert next(transactions_descript) == "Перевод со счета на счет"
     assert next(transactions_descript) == "Перевод со счета на счет"
