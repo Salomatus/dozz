@@ -110,7 +110,7 @@ usd_transactions = filter_by_currency(transactions, "USD")
 for _ in range(3):
     print(next(usd_transactions)['id'])
 
-descriptions = transaction_descriptions(transactions)
+descriptions = transactions_descriptions(transactions)
 for _ in range(5):
     print(next(descriptions))
 
