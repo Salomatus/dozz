@@ -11,6 +11,6 @@ git clone https://github.com/username/project-x.git
 В ветки feature/homework_10_2 добавлены тесты для проверки рабочих процессов.
 Итоговое покрытие тестами составило 85%.
 Создал ветку feature/homework_11_1 в которой создал модуль generators.py
-Создал ветку feature/homework_11_1 в которой создал модуль decorators.py
+Создал ветку feature/homework_11_2 в которой создал модуль decorators.py
 Документация:
 Для получения дополнительной информации обратитесь к документации (README.md).
