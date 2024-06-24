@@ -2,8 +2,6 @@ import json
 import unittest
 from unittest.mock import MagicMock, mock_open, patch
 
-from src.utils import transaction_amount
-
 
 class TestGetTransactions(unittest.TestCase):
 
