@@ -10,7 +10,7 @@ from src.generators import (
     card_number_generator,
 )
 
-from src.utils import transaction_list_amount
+from src.utils import transaction_list_amount, open_csv_data, open_excel_data
 
 from src.external_api import currency_conversion
 
