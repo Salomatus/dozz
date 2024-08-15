@@ -1,7 +1,9 @@
 from typing import Iterable, Iterator
 
 
-def filter_by_currency(transactions: Iterable[dict], currency_code: str) -> Iterator[dict]:
+def filter_by_currency(
+    transactions: Iterable[dict], currency_code: str
+) -> Iterator[dict]:
     """Функция принимает список словарей (или объект-генератор) с банковскими
     операциями и возвращает итератор, который выдает по очереди операции,
     в которых указана заданная валюта."""

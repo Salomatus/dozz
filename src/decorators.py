@@ -17,7 +17,10 @@ def log(filename: Optional[str] = None) -> Callable:
                 return result
 
             except Exception as e:
-                log_str = f"{func.__name__} {type(e).__name__}: " f"{e}. Inputs: {args}, {kwargs}"
+                log_str = (
+                    f"{func.__name__} {type(e).__name__}: "
+                    f"{e}. Inputs: {args}, {kwargs}"
+                )
                 raise e
 
             finally:
