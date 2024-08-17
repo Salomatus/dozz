@@ -1,1 +1,3 @@
 
+example_function ok. Result: 500
+example_function TypeError: Что-то пошло не так. Inputs: (5, 100), {}
