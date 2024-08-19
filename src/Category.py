@@ -17,4 +17,3 @@ class Category:
         for x in self.__products:
             Category.products_set.add(x.name)
         Category.products_counter = len(Category.products_set)
-
