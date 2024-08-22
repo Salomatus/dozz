@@ -1,5 +1,6 @@
 from src.Category import Category
 
+
 from src.Production import Product
 
 
@@ -8,11 +9,18 @@ def main(load_data=None):
     list_category = []
     for unit in data:
         list_product = [un for un in unit["products"]]
-        category = Category(unit["name"], unit["description"], unit["products"])
-        list_category.append(f'{category.get_name()}\n'
-                             f'{category.get_description()}\n'
-                             f'{category.add_goods()}\n\n'
-                             )
+
+    class Category:
+        category_count = 0
+        product_count = 0
+
+        def __init__(self, name: str, description: str, products: list = None) -> None:
+            self.name = name
+            self.description = description
+            self.products = products
+            Category.category_count += 1
+            Category.product_count += len(self.products)
+
         result = []
         for element in list_product:
             product = Product(element["name"], element["description"],

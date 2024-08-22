@@ -36,3 +36,5 @@ def test_price(product_test):
     product_test.price = 15.0
     assert product_test.price == 15.0
 
+
+
