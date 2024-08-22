@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from src.config import file_path
-from src.utils import reader_transaction_excel, get_user_setting, get_currency_rates, get_stock_price
+from src.utils import reader_transaction_excel, get_user_setting
 from src.views import main
 from src.views import get_expenses_cards, get_greeting, top_transaction, transaction_currency
 
