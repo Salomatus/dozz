@@ -3,7 +3,7 @@ from src.Category import Category
 from src.Production import Product
 
 
-def main():
+def main(load_data=None):
     data = load_data
     list_category = []
     for unit in data:
