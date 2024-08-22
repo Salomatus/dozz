@@ -18,4 +18,3 @@ if __name__ == "__main__":
 
     print(date_json)
     print(file_path)
-
