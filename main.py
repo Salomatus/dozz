@@ -1,5 +1,4 @@
-from src.Category import Category
-
+from src.Category import Categoria
 
 from src.Production import Product
 
