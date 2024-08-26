@@ -1,8 +1,6 @@
 import pytest
 import pandas as pd
-import datetime as dt
 from src.reports import spending_by_category
-from src.utils import get_data
 
 
 @pytest.fixture
@@ -28,7 +26,8 @@ def test_spending_by_category_with_date(sample_data):
     result = spending_by_category(sample_data, "Продукты", "30.12.2021 17:50:30")
     assert (
         len(result) == 2
-    )  # Ожидается 2 строки, так как только две операции с категорией "Продукты" за последние три месяца от указанной даты
+    )  # Ожидается 2 строки, так как только две операции с категорией
+    # "Продукты" за последние три месяца от указанной даты
 
 
 def test_spending_by_category_no_date(sample_data):

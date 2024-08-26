@@ -2,8 +2,6 @@ import logging
 from pathlib import Path
 import json
 from src.utils import (
-    get_data,
-    reader_transaction_excel,
     top_transaction,
     transaction_currency,
     get_expenses_cards,
@@ -11,6 +9,7 @@ from src.utils import (
     get_stock_price,
     get_greeting,
 )
+
 
 ROOT_PATH = Path(__file__).resolve().parent.parent
 

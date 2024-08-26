@@ -2,8 +2,6 @@ import pytest
 import datetime
 import datetime as dt
 from pathlib import Path
-
-from src.config import file_path
 from src.utils import (
     get_data,
     reader_transaction_excel,
@@ -12,13 +10,10 @@ from src.utils import (
     get_currency_rates,
     get_greeting,
     get_expenses_cards,
-    top_transaction,
-    transaction_currency,
 )
 import unittest
 from unittest import mock
 import pandas as pd
-import json
 from unittest.mock import mock_open, patch
 
 
@@ -62,7 +57,7 @@ class TestReaderTransactionExcel(unittest.TestCase):
         result = reader_transaction_excel("test_file.xlsx")
 
         self.assertEqual(result.shape, mock_df.shape)
-        self.assertTrue(all(result["transaction_id"] == mock_df["transaction_id"]))
+        self.assertTrue(all(result['transaction_id'] == mock_df['transaction_id']))
 
 
 def test_get_dict_transaction_file_not_found():
@@ -198,3 +193,4 @@ def test_get_expenses_cards(sample_transactions):
 
     assert result[0] == {"last_digits": "*1112", "total spent": 100, "cashback": 1.0}
     assert result[1] == {"last_digits": "*5091", "total spent": 200, "cashback": 2.0}
+    assert result[2] == {"last_digits": "*", "total spent": 0, "cashback": 0.0}

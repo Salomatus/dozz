@@ -55,7 +55,7 @@ def spending_by_category(df_transactions: pd.DataFrame, category: str, date: [st
         & (pd.to_datetime(df_transactions["Дата операции"], dayfirst=True) >= start_data)
         & (df_transactions["Категория"] == category)
     ]
-    return transactions_by_category
+    return transactions_by_category .groupby(["Категория", "Дата операции"]).sum().reset_index()
 
 
 if __name__ == "__main__":
@@ -63,3 +63,4 @@ if __name__ == "__main__":
         reader_transaction_excel(str(ROOT_PATH) + file_path), "Аптеки", "26.07.2019 20:58:55"
     )
     print(result)
+    # выводит на экран результат работы функции, в случае успеха - None.

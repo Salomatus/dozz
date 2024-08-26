@@ -1,13 +1,14 @@
-import datetime
 import datetime as dt
 import json
 import logging
+import datetime
 from pathlib import Path
 import pandas as pd
 from src.config import file_path
 import os
 import requests
 from dotenv import load_dotenv
+
 
 load_dotenv("..\\.env")
 
@@ -43,12 +44,11 @@ def reader_transaction_excel(file_path) -> pd.DataFrame:
         return df_transactions
     except FileNotFoundError:
         logger.info(f"Файл {file_path} не найден")
-        raise
+        raise FileNotFoundError(f"Файл {file_path} не найден")
 
 
 def get_dict_transaction(file_path) -> list[dict]:
     """Функция преобразовывающая датафрейм в словарь pyhton"""
-    logger.info(f"Вызвана функция get_dict_transaction с файлом {file_path}")
     try:
         df = pd.read_excel(file_path)
         logger.info(f"Файл {file_path}  прочитан")
@@ -114,7 +114,6 @@ def get_stock_price(stocks):
         response = requests.get(url)
         if response.status_code != 200:
             print(f"Запрос не был успешным. Возможная причина: {response.reason}")
-
         else:
             data_ = response.json()
             stock_price.append({"stock": stock, "price": round(float(data_["Global Quote"]["05. price"]), 2)})
@@ -127,7 +126,7 @@ if __name__ == "__main__":
 
     stock = "AAPL"
     stock_price = get_stock_price(["AAPL", "AMZN", "GOOGL", "MSFT", "TSLA"])
-    API_KEY_STOCK = "1LEAU1JX6KFZ65TN"
+    API_KEY_STOCK = '1LEAU1JX6KFZ65TN'
 
 
 def top_transaction(df_transactions):
@@ -214,7 +213,7 @@ if __name__ == "__main__":
 
 
 def get_greeting():
-    """Функция- приветствие"""
+    """Функция - приветствие"""
     hour = dt.datetime.now().hour
     if 4 <= hour < 12:
         return "Доброе утро"
