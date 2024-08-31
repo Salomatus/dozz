@@ -1,35 +1,68 @@
-from src.Category import Categoria
-
-from src.Production import Product
 
 
-def main(load_data=None):
-    data = load_data
-    list_category = []
-    for unit in data:
-        list_product = [un for un in unit["products"]]
+class Category:
+    """Класс для категорий """
 
-    class Category:
-        category_count = 0
-        product_count = 0
+    name: str
+    description: str
+    __goods: list  # приватный атрибуд
 
-        def __init__(self, name: str, description: str, products: list = None) -> None:
+    # общее количество категорий и общее количество уникальных продуктов
+    number_of_categories = 0
+    number_of_unique_products = 0
+
+    def __init__(self, name, description):
+            """Метод для инициализации экземпляра класса, задаем значение атрибутам экземпляра"""
             self.name = name
             self.description = description
-            self.products = products
-            Category.category_count += 1
-            Category.product_count += len(self.products)
+            self.__goods = []  # Инициализируем список товаров
 
-        result = []
-        for element in list_product:
-            product = Product(element["name"], element["description"],
-                              element["price"], element["quantity"])
-            result.append(f'{product.get_product_name()}\n'
-                          f'{product.get_product_description()}\n'
-                          f'{product.get_product_price()}\n'
-                          f'{product.get_product_quantity_in_stock()}\n\n'
-                          )
-            print(list_category)
+            Category.number_of_categories += 1
+            Category.number_of_unique_products += 1
 
-            if __name__ == '__main__':
-                main()
+    def add_product(self, product):
+            """Метод для добавления товара в список товаров"""
+            self.__goods.append(product)
+
+    @property
+    def goods(self):
+            goods_info = []
+            for product in self.__goods:
+                goods_info.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n")
+                return goods_info
+
+
+class Production:
+    """Класс для продуктов"""
+
+    name: str
+    description: str
+    price: float
+    quantity: int
+
+    def __init__(self, name, description, price, quantity):
+        """Метод для инициализации экземпляра класса, задаем значение атрибутам экземпляра"""
+        self.name = name
+        self.description = description
+        self.__price = price  # приватный атрибут
+        self.quantity = quantity
+
+    @classmethod
+    def create_product(cls, name, description, price, quantity):
+        """Класс-метод для создания товара и возращения объекта"""
+        return cls(name, description, price, quantity)
+
+    @classmethod
+    def create_product1(cls, name, description, price, quantity, products_list):
+        for existing_product in products_list:
+            if existing_product.name == name:
+                if existing_product.price < price:
+                    existing_product.price = price
+                existing_product.quantity += quantity
+                return None
+        new_product = cls(name, description, price, quantity)
+        products_list.append(new_product)
+        return new_product
+
+    if __name__ == '__main__':
+        main()
