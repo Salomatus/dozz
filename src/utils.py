@@ -35,20 +35,20 @@ def get_data(data: str) -> datetime.datetime:
 
 
 def reader_transaction_excel(file_path) -> pd.DataFrame:
-    """Функция принимает на вход путь до файла и возвращает датафрейм"""
+    """Функция принимает на вход путь до файла и возвращает дата-фрейм"""
+
     logger.info(f"Вызвана функция получения транзакций из файла {file_path}")
     try:
         df_transactions = pd.read_excel(file_path)
         logger.info(f"Файл {file_path} найден, данные о транзакциях получены")
-
-        return df_transactions
     except FileNotFoundError:
         logger.info(f"Файл {file_path} не найден")
-        raise FileNotFoundError(f"Файл {file_path} не найден")
+    raise
+    return df_transactions
 
 
 def get_dict_transaction(file_path) -> list[dict]:
-    """Функция преобразовывающая датафрейм в словарь pyhton"""
+    """Функция преобразовывающая дата-фрейм в словарь pyhton"""
     try:
         df = pd.read_excel(file_path)
         logger.info(f"Файл {file_path}  прочитан")
@@ -78,7 +78,7 @@ def get_user_setting(path):
 
 
 def get_currency_rates(currencies):
-    """функция, возвращает курсы"""
+    """Функция, возвращает курсы"""
     logger.info("Вызвана функция для получения курсов")
     API_KEY = os.environ.get("API_KEY")
     symbols = ",".join(currencies)
@@ -201,7 +201,6 @@ def transaction_currency(df_transactions: pd.DataFrame, data: str) -> pd.DataFra
         & (pd.to_datetime(df_transactions["Дата операции"], dayfirst=True) >= start_data)
     ]
     logger.info(f"Получен DataFrame transaction_currency: {transaction_currency}")
-
     return transaction_currency
 
 

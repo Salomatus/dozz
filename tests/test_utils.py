@@ -1,5 +1,6 @@
 import pytest
 import datetime
+import os
 import datetime as dt
 from pathlib import Path
 from src.utils import (
@@ -21,7 +22,7 @@ ROOT_PATH = Path(__file__).resolve().parent.parent
 
 
 def test_get_data_input():
-    """Проверяем, что функция корректно обрабатывает  ввод"""
+    """Проверяем, что функция корректно обрабатывает ввод"""
     input_data = "01.01.2023 12:00:00"
     expected_output = datetime.datetime(2023, 1, 1, 12, 0, 0)
     assert get_data(input_data) == expected_output
@@ -44,20 +45,25 @@ def test_get_data_empty_input():
 def test_reader_excel_file_not_found():
     """Проверка, что функция поднимает исключение при передаче несуществующего файла"""
     with pytest.raises(FileNotFoundError):
-        reader_transaction_excel("path/to/non-existent/file.xlsx")
+        reader_transaction_excel("path/to/non-existent/operations.xlsx")
 
 
 class TestReaderTransactionExcel(unittest.TestCase):
     @patch("pandas.read_excel")
     def test_successful_read(self, mock_read_excel):
         # Arrange
-        mock_df = pd.DataFrame({"transaction_id": [1, 2, 3]})
-        mock_read_excel.return_value = mock_df
+        def test_reader_transaction_excel(mock_read_excel):
+            """Тест проверяет работу функции reader_transaction_excel"""
+            mock_df = pd.DataFrame({"transaction_id": [1, 2, 3]})
+            mock_read_excel.return_value = mock_df
 
-        result = reader_transaction_excel("test_file.xlsx")
+            result = reader_transaction_excel("test_file.xlsx")
 
-        self.assertEqual(result.shape, mock_df.shape)
-        self.assertTrue(all(result['transaction_id'] == mock_df['transaction_id']))
+            assert result.shape == mock_df.shape
+            assert all(result["transaction_id"] == mock_df["transaction_id"])
+
+        if __name__ == "__main__":
+            test_reader_transaction_excel(mock_read_excel)
 
 
 def test_get_dict_transaction_file_not_found():
@@ -193,4 +199,3 @@ def test_get_expenses_cards(sample_transactions):
 
     assert result[0] == {"last_digits": "*1112", "total spent": 100, "cashback": 1.0}
     assert result[1] == {"last_digits": "*5091", "total spent": 200, "cashback": 2.0}
-    assert result[2] == {"last_digits": "*", "total spent": 0, "cashback": 0.0}

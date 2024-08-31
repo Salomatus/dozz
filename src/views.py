@@ -23,9 +23,9 @@ logger.addHandler(file_handler)
 
 
 def main(df_transactions, date, user_currencies, user_stocks):
-    "Главная функция, делающая вывод на главную страницу"
+    """Главная функция, делающая вывод на главную страницу"""
     greeting = get_greeting()
-    transactions = transaction_currency(df_transactions, date)
+    transaction = transaction_currency(df_transactions, date)
     cards = get_expenses_cards(df_transactions)
     top_trans = top_transaction(df_transactions)
     currency_rates = get_currency_rates(user_currencies)
