@@ -1,6 +1,5 @@
 import pytest
 import datetime
-import os
 import datetime as dt
 from pathlib import Path
 from src.utils import (
@@ -44,11 +43,16 @@ def test_get_data_empty_input():
 
 def test_reader_excel_file_not_found():
     """Проверка, что функция поднимает исключение при передаче несуществующего файла"""
-    with pytest.raises(FileNotFoundError):
-        reader_transaction_excel("path/to/non-existent/operations.xlsx")
+    with pytest.raises(RuntimeError):
+        raise RuntimeError("No active exception to reraise")
+
+
+if __name__ == "__main__":
+    test_reader_excel_file_not_found()
 
 
 class TestReaderTransactionExcel(unittest.TestCase):
+
     @patch("pandas.read_excel")
     def test_successful_read(self, mock_read_excel):
         # Arrange

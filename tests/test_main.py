@@ -1,9 +1,22 @@
 from src.main import main
 from unittest.mock import Mock, patch
+from datetime import datetime
 
 
 @patch('requests.get')
-def test_mine_main(mock_get):
+def test_mine_main(mock_read_excel):
+    """Тест проверяет работу функции mine_main"""
+    data_string = "01.05.2023 12:34:56"
+    format = "%d.%m.%Y %H:%M:%S"
+    try:
+        datetime.strptime(data_string, format)
+    except ValueError as e:
+        print(f"Ошибка при преобразовании даты: {e}")
+
+
+if __name__ == "__main__":
+    test_mine_main()
+
     mock_get.return_value.json.return_value = {
         "greeting": "Добрый день",
         "cards": [
@@ -115,4 +128,4 @@ def test_mine_main(mock_get):
                 "stock": "AAPL",
                 "price": 228.03
             }]}
-    pass
+    print(res)

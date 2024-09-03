@@ -1,5 +1,6 @@
 import datetime as dt
 import json
+import pandas
 import logging
 import datetime
 from pathlib import Path
@@ -10,16 +11,19 @@ import requests
 from dotenv import load_dotenv
 
 
-load_dotenv("..\\.env")
+ROOT_PATH = Path(__file__).parent.parent
 
-ROOT_PATH = Path(__file__).resolve().parent.parent
+load_dotenv()
+API_KEY_CUR = os.getenv("API_KEY_CUR")
 
-logger = logging.getLogger("logs")
-logger.setLevel(logging.INFO)
-file_handler = logging.FileHandler("..\\logs\\utils.log", encoding="utf-8")
-file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
+SP_500_API_KEY = os.getenv("SP_500_API_KEY")
+
+logger = logging.getLogger("utils.log")
+file_handler = logging.FileHandler("utils.log", "w")
+file_formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
+logger.setLevel(logging.INFO)
 
 
 def get_data(data: str) -> datetime.datetime:
@@ -44,7 +48,6 @@ def reader_transaction_excel(file_path) -> pd.DataFrame:
     except FileNotFoundError:
         logger.info(f"Файл {file_path} не найден")
     raise
-    return df_transactions
 
 
 def get_dict_transaction(file_path) -> list[dict]:
@@ -64,8 +67,8 @@ def get_dict_transaction(file_path) -> list[dict]:
 
 
 if __name__ == "__main__":
-    dict_transaction = get_dict_transaction(str(ROOT_PATH) + file_path)
-    print(dict_transaction)
+        dict_transaction = get_dict_transaction(str(ROOT_PATH) + file_path)
+        print(dict_transaction)
 
 
 def get_user_setting(path):
@@ -140,7 +143,7 @@ def top_transaction(df_transactions):
         top_transaction_list.append(
             {
                 "date": str(
-                    (datetime.datetime.strptime(transaction["Дата операции"], "%d.%m.%Y %H:%M:%S"))
+                    (datetime.datetime.strptime(transaction["Дата операции"], "%d.%m.%Y"))
                     .date()
                     .strftime("%d.%m.%Y")
                 ).replace("-", "."),
